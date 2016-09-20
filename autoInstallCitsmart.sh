@@ -4,29 +4,29 @@
 
 # Declaração das variaveis
 
-TMPDIR="/tmp/citsmart"
+TMPDIR="/tmp/citsmart";
 
-INSTALLDIR="/opt/citsmart"
+INSTALLDIR="/opt/citsmart";
 
-JBOSSDIR="/opt/jboss"
+JBOSSDIR="/opt/jboss";
 
-JBOSSADMINPASSWORD=`openssl rand -hex 10`
+JBOSSADMINPASSWORD=`openssl rand -hex 10`;
 
-PGSQLDIR="/var/lib/pgsql/9.3/data/"
-CTSMRTSQLUSER="citsmartuser"
-CTSMRTSQLDB="citsmartdb"
-CTSMRTSQLPASSWD=`openssl rand -hex 10`
+PGSQLDIR="/var/lib/pgsql/9.3/data/";
+CTSMRTSQLUSER="citsmartuser";
+CTSMRTSQLDB="citsmartdb";
+CTSMRTSQLPASSWD=`openssl rand -hex 10`;
 
 # Primeiro faça o download e instalação dos  Softwares Requisitos.
 prereq() {
 
-	mkdir $TMPDIR
+	mkdir $TMPDIR;
 	# Download do JBOSS
-	wget -P $TMPDIR http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.zip
+	wget -P $TMPDIR http://download.jboss.org/jbossas/7.1/jboss-as-7.1.1.Final/jboss-as-7.1.1.Final.zip;
 	# Download do Driver JDBC do PostgreSQL
-	wget -P $TMPDIR https://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc41.jar
+	wget -P $TMPDIR https://jdbc.postgresql.org/download/postgresql-9.3-1103.jdbc41.jar;
 	# Instalação do Repositório do PostgreSQL
-	rpm --quiet -ih https://download.postgresql.org/pub/repos/yum/9.3/redhat/rhel-7-x86_64/pgdg-centos93-9.3-2.noarch.rpm
+	rpm --quiet -ih https://download.postgresql.org/pub/repos/yum/9.3/redhat/rhel-7-x86_64/pgdg-centos93-9.3-2.noarch.rpm;
 	# Instalação dos Requisitos Iniciais do Sistema
 	yum -q -y install epel-release;
 
@@ -47,36 +47,36 @@ prereq() {
 
 dbconfig() {
 
-	systemctl enable postgresql-9.3
+	systemctl enable postgresql-9.3;
 
-	su - postgres -c "/usr/pgsql-9.3/bin/initdb -D $POSTGRESQLDIR"
+	su - postgres -c "/usr/pgsql-9.3/bin/initdb -D $POSTGRESQLDIR";
 
 	echo "host    all             all             127.0.0.1/32               md5" >> /var/lib/pgsql/9.3/data/pg_hba.conf;
 
-	systemctl start postgresql-9.3
+	systemctl start postgresql-9.3;
 
-	su - postgres -c "psql -c \"create user $CTSMRTSQLUSER with password '$CITSMARTSQLPASSWD';\""
+	su - postgres -c "psql -c \"create user $CTSMRTSQLUSER with password '$CITSMARTSQLPASSWD';\"";
 
-	su - postgres -c "psql -c \"create database $CTSMRTSQLDB with owner $CTSMRTSQLUSER encoding 'UTF8' tablespace pg_default;\""
+	su - postgres -c "psql -c \"create database $CTSMRTSQLDB with owner $CTSMRTSQLUSER encoding 'UTF8' tablespace pg_default;\"";
 
 }
 
 # Configuração do JBOSS para o Citsmart
 jbossconfig() {
 
-	unzip $TMPDIR/jboss-as-7.1.1.Final.zip -d /opt/
+	unzip $TMPDIR/jboss-as-7.1.1.Final.zip -d /opt/;
 
-	ln -s /opt/jboss-as-7.1.1.Final/ $JBOSSDIR
+	ln -s /opt/jboss-as-7.1.1.Final/ $JBOSSDIR;
 
-	adduser -d $JBOSSDIR jboss
+	adduser -d $JBOSSDIR jboss;
 
-	chown -fR jboss.jboss /opt/jboss-as-7.1.1.Final/
+	chown -fR jboss.jboss /opt/jboss-as-7.1.1.Final/;
 
-	su - jboss -s "$JBOSSDIR/bin/add-user.sh admin $JBOSSADMINPASSWORD"
+	su - jboss -s "$JBOSSDIR/bin/add-user.sh admin $JBOSSADMINPASSWORD";
 
-	mkdir -p $JBOSSDIR/modules/org/postgresql/main
+	mkdir -p $JBOSSDIR/modules/org/postgresql/main;
 
-	cp $TMPDIR/postgresql-9.3-1103.jdbc41.jar $JBOSSDIR/modules/org/postgresql/main/
+	cp $TMPDIR/postgresql-9.3-1103.jdbc41.jar $JBOSSDIR/modules/org/postgresql/main/;
 
 }
 
