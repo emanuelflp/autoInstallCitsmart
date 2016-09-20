@@ -80,3 +80,4 @@ jbossconfig() {
 
 }
 
+prereq
