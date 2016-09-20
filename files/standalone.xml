@@ -103,7 +103,7 @@
         <subsystem xmlns="urn:jboss:domain:datasources:1.0">
             <datasources>
                 <datasource jndi-name="java:/jdbc/citsmart" pool-name="citsmartDSPostgres" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/citsmart</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5432/CITSMARTSQLDB</connection-url>
                     <driver>postgres</driver>
                     <pool>
                         <min-pool-size>10</min-pool-size>
@@ -113,7 +113,7 @@
                     </pool>
                     <security>
                         <user-name>CITSMARTSQLUSER</user-name>
-                        <password>supera123</password>
+                        <password>CITSMARTSQLPASSWORD</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
@@ -130,7 +130,7 @@
                     </statement>
                 </datasource>
                 <datasource jndi-name="java:/jdbc/citsmartFluxo" pool-name="citsmartDSPostgresFluxo" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/citsmart</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5432/CITSMARTSQLDB</connection-url>
                     <driver>postgres</driver>
                     <pool>
                         <min-pool-size>10</min-pool-size>
@@ -140,7 +140,7 @@
                     </pool>
                     <security>
                         <user-name>CITSMARTSQLUSER</user-name>
-                        <password>supera123</password>
+                        <password>CITSMARTSQLPASSWORD</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
@@ -157,7 +157,7 @@
                     </statement>
                 </datasource>
                 <datasource jndi-name="java:/jdbc/citsmart_inventory" pool-name="citsmartDSPostgresInventory" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/citsmart</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5432/CITSMARTSQLDB</connection-url>
                     <driver>postgres</driver>
                     <pool>
                         <min-pool-size>1</min-pool-size>
@@ -167,7 +167,7 @@
                     </pool>
                     <security>
                         <user-name>CITSMARTSQLUSER</user-name>
-                        <password>supera123</password>
+                        <password>CITSMARTSQLPASSWORD</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
@@ -184,7 +184,7 @@
                     </statement>
                 </datasource>
                 <datasource jndi-name="java:/jdbc/citsmart_reports" pool-name="citsmartDSPostgresReports" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/citsmart</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5432/CITSMARTSQLDB</connection-url>
                     <driver>postgres</driver>
                     <pool>
                         <min-pool-size>1</min-pool-size>
@@ -194,7 +194,7 @@
                     </pool>
                     <security>
                         <user-name>CITSMARTSQLUSER</user-name>
-                        <password>supera123</password>
+                        <password>CITSMARTSQLPASSWORD</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
@@ -211,7 +211,7 @@
                     </statement>
                 </datasource>
                 <datasource jndi-name="java:/jdbc/citsmartBpmEventos" pool-name="citsmartDSPostgresEventos" enabled="true" use-java-context="true">
-                    <connection-url>jdbc:postgresql://localhost:5432/citsmart</connection-url>
+                    <connection-url>jdbc:postgresql://localhost:5432/CITSMARTSQLDB</connection-url>
                     <driver>postgres</driver>
                     <pool>
                         <min-pool-size>1</min-pool-size>
@@ -221,7 +221,7 @@
                     </pool>
                     <security>
                         <user-name>CITSMARTSQLUSER</user-name>
-                        <password>supera123</password>
+                        <password>CITSMARTSQLPASSWORD</password>
                     </security>
                     <validation>
                         <valid-connection-checker class-name="org.jboss.jca.adapters.jdbc.extensions.postgres.PostgreSQLValidConnectionChecker"/>
