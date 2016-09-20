@@ -12,7 +12,10 @@ JBOSSDIR="/opt/jboss"
 
 JBOSSADMINPASSWORD=`openssl rand -hex 10`
 
-POSTGRESQLDIR="/var/lib/pgsql/9.3/data/"
+PGSQLDIR="/var/lib/pgsql/9.3/data/"
+CTSMRTSQLUSER="citsmartuser"
+CTSMRTSQLDB="citsmartdb"
+CTSMRTSQLPASSWD=`openssl rand -hex 10`
 
 # Primeiro faça o download e instalação dos  Softwares Requisitos.
 prereq() {
@@ -46,15 +49,15 @@ dbconfig() {
 
 	systemctl enable postgresql-9.3
 
-	su - postgres -c "/usr/pgsql-9.3/bin/initdb -D /var/lib/pgsql/9.3/data/"
+	su - postgres -c "/usr/pgsql-9.3/bin/initdb -D $POSTGRESQLDIR"
 
 	echo "host    all             all             127.0.0.1/32               md5" >> /var/lib/pgsql/9.3/data/pg_hba.conf;
 
 	systemctl start postgresql-9.3
 
-	su - postgres -c "psql -c \"create user citsmart with password 'supera123';\""
+	su - postgres -c "psql -c \"create user $CTSMRTSQLUSER with password '$CITSMARTSQLPASSWD';\""
 
-	su - postgres -c "psql -c \"create database citsmart with owner citsmart encoding 'UTF8' tablespace pg_default;\""
+	su - postgres -c "psql -c \"create database $CTSMRTSQLDB with owner $CTSMRTSQLUSER encoding 'UTF8' tablespace pg_default;\""
 
 }
 
@@ -76,3 +79,4 @@ jbossconfig() {
 	cp $TMPDIR/postgresql-9.3-1103.jdbc41.jar $JBOSSDIR/modules/org/postgresql/main/
 
 }
+
