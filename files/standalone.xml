@@ -112,7 +112,7 @@
                         <flush-strategy>IdleConnections</flush-strategy>
                     </pool>
                     <security>
-                        <user-name>citsmart</user-name>
+                        <user-name>CITSMARTSQLUSER</user-name>
                         <password>supera123</password>
                     </security>
                     <validation>
@@ -139,7 +139,7 @@
                         <flush-strategy>IdleConnections</flush-strategy>
                     </pool>
                     <security>
-                        <user-name>citsmart</user-name>
+                        <user-name>CITSMARTSQLUSER</user-name>
                         <password>supera123</password>
                     </security>
                     <validation>
@@ -166,7 +166,7 @@
                         <flush-strategy>IdleConnections</flush-strategy>
                     </pool>
                     <security>
-                        <user-name>citsmart</user-name>
+                        <user-name>CITSMARTSQLUSER</user-name>
                         <password>supera123</password>
                     </security>
                     <validation>
@@ -193,7 +193,7 @@
                         <flush-strategy>IdleConnections</flush-strategy>
                     </pool>
                     <security>
-                        <user-name>citsmart</user-name>
+                        <user-name>CITSMARTSQLUSER</user-name>
                         <password>supera123</password>
                     </security>
                     <validation>
@@ -220,7 +220,7 @@
                         <flush-strategy>IdleConnections</flush-strategy>
                     </pool>
                     <security>
-                        <user-name>citsmart</user-name>
+                        <user-name>CITSMARTSQLUSER</user-name>
                         <password>supera123</password>
                     </security>
                     <validation>
