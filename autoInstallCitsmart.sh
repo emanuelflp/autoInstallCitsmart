@@ -12,7 +12,7 @@ JBOSSDIR="/opt/jboss";
 
 JBOSSADMINPASSWORD=`openssl rand -hex 10`;
 
-PGSQLDIR="/var/lib/pgsql/9.3/data/";
+PGSQLDIR="/var/lib/pgsql/9.3/data";
 CTSMRTSQLUSER="citsmartuser";
 CTSMRTSQLDB="citsmartdb";
 CTSMRTSQLPASSWD=`openssl rand -hex 10`;
@@ -49,9 +49,9 @@ dbconfig() {
 
 	systemctl enable postgresql-9.3;
 
-	su - postgres -c "/usr/pgsql-9.3/bin/initdb -D $POSTGRESQLDIR";
+	su - postgres -c "/usr/pgsql-9.3/bin/initdb -D $PGSQLDIR/";
 
-	echo "host    all             all             127.0.0.1/32               md5" >> /var/lib/pgsql/9.3/data/pg_hba.conf;
+	echo "host    all             all             127.0.0.1/32               md5" >> $PGSQLDIR/pg_hba.conf;
 
 	systemctl start postgresql-9.3;
 
