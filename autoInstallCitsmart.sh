@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Script para Instalação automatizada do CitSmart ITSM no Centos 7
+# Script para Instalação automatizada do CitSmart ITSM no Centos 7 ou Centos 6
 
 # Declaração das variaveis
 
@@ -16,6 +16,27 @@ PGSQLDIR="/var/lib/pgsql/9.3/data";
 CTSMRTSQLUSER="citsmartuser";
 CTSMRTSQLDB="citsmartdb";
 CTSMRTSQLPASSWD=`openssl rand -hex 10`;
+
+fail() { log "\nERRO: $*\n" ; exit 1 ; }
+
+verificaDistro() {
+
+if [[ -f /etc/centos-release ]]; then
+	
+	versaodistro=`rpm -q --queryformat '%{VERSION}' centos-release`
+
+	if [[ ! $versaodistro -eq 7 || ! $versaodistro -eq 6 ]]; then
+		fail "Este script é compativel somente o CentOS nas Versões 6 ou 7";
+	fi
+
+else
+	
+	fail "Este script é compativel somente o CentOS nas Versões 6 ou 7";
+
+fi
+
+
+}
 
 # Primeiro faça o download e instalação dos  Softwares Requisitos.
 prereq() {
@@ -46,7 +67,7 @@ prereq() {
 # Iniciando configuração do Banco de dados Postgresql
 
 dbconfig() {
-
+{
 	systemctl enable postgresql-9.3 &> /dev/null;
 
 	su - postgres -c "/usr/pgsql-9.3/bin/initdb -D $PGSQLDIR/" &> /dev/null;
@@ -58,6 +79,10 @@ dbconfig() {
 	su - postgres -c "psql -c \"create user $CTSMRTSQLUSER with password '$CITSMARTSQLPASSWD';\"" &> /dev/null;
 
 	su - postgres -c "psql -c \"create database $CTSMRTSQLDB with owner $CTSMRTSQLUSER encoding 'UTF8' tablespace pg_default;\"" &> /dev/null;
+
+} || {
+
+}
 
 }
 
