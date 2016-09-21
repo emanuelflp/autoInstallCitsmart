@@ -80,4 +80,4 @@ jbossconfig() {
 
 }
 
-prereq
+dbconfig
